@@ -5,11 +5,13 @@ class apache (
   String $install_ensure,
   String $config_ensure,
   String $config_path,
+  Enum["running", "stopped"] $service_ensure, 
   String $service_name,
+  Boolean $service_enable,
 ) {
-  include apache::install
-  include apache::config
-  include apache::service
+  contain apache::install
+  contain apache::config
+  contain apache::service
 
   Class['::apache::install']
   -> Class['::apache::config']
